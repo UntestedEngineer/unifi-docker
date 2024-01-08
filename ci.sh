@@ -14,7 +14,7 @@ getTags() {
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   docker buildx build \
     --progress plain \
-    --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+    --platform linux/arm64/v8,linux/amd64 \
     .
 
   docker build -t unifi:latest .
@@ -28,7 +28,7 @@ fi
 echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin &> /dev/null
 docker buildx build \
   --progress plain \
-  --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
+  --platform linux/arm64/v8,linux/amd64 \
   $(getTags) \
   --push \
   .
