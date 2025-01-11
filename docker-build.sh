@@ -36,7 +36,7 @@ apt-get install -qy --no-install-recommends \
     dirmngr \
     gpg \
     gpg-agent \
-    openjdk-17-jre-headless \
+    openjdk-21-jre-headless \
     procps \
     libcap2-bin \
     tzdata
@@ -44,8 +44,8 @@ echo 'deb https://www.ui.com/downloads/unifi/debian stable ubiquiti' | tee /etc/
 tryfail apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 06E85760C0A52C50
 
 # Add mongodb CE edition repository (mongodb is not included in > 22.04 default repositories)
-curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
 # Install mongodb CE edition
 apt-get update
