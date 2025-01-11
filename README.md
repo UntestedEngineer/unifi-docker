@@ -2,12 +2,13 @@
 
 # Unifi-in-Docker (unifi-docker)
 
-## Important update 5/5/2024 ##
-As of application version 8.1 Unifi now supports mongodb <= 7.0.
-v8.1.127 of the docker application in this repository has been refactored to utilize Ubuntu 24.04.  However, Ubuntu > 20.04 no longer includes mongodb in the default repositories so the docker-build.sh file has been updated to include adding and installing mongodb CE directly from their official repository.
+## Important update 1/11/2025 ##
+As of application version 9.x Unifi now supports mongodb <= 8.0 **AND** Java 21.  v9.0.108 of the docker application in this repository has been refactored to utilize Ubuntu 24.04 and Java 21.  However, Ubuntu > 20.04 no longer includes mongodb in the default repositories so the docker-build.sh file has been updated to include adding and installing mongodb 8 CE directly from their official repository.
+
+When upgrading from 8.x to 9.x Unifi devices _may_ need to re-adopt.
 
 ### Breaking changes coming from mongodb 3.6
-If the container being run is an attempted "upgrade" from v8.1.113 using Ubuntu 20.04 and mongodb 3.6 the application will fail to start.  Since the mongodb version jump is considerable (3.6 to 7.0) a brand new instance of the controller is required starting from scratch.  Backup the configuration of the controller, delete the persistent volume/persistent volume claim, recreate the resources then reimport the controller configuration.
+If the container being run is an attempted "upgrade" from v8.1.113 or 9.x using Ubuntu 20.04 and mongodb 3.6 the application will fail to start.  Since the mongodb version jump is considerable (3.6 to 7.0 or 8.0) a brand new instance of the controller is required starting from scratch.  Backup the configuration of the controller, delete the persistent volume/persistent volume claim, recreate the resources then reimport the controller configuration.
 
 ##
 
