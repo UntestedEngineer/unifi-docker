@@ -1,4 +1,4 @@
-FROM golang:1.24.5-bookworm AS permset
+FROM golang:1.25.1-trixie AS permset
 WORKDIR /src
 RUN git clone https://github.com/jacobalberty/permset.git /src && \
     mkdir -p /out && \
@@ -10,7 +10,7 @@ LABEL maintainer="Jacob Alberty <jacob.alberty@foundigital.com>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/9.3.43/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/9.3.45/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \
