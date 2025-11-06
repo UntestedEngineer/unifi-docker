@@ -4,13 +4,13 @@ RUN git clone https://github.com/jacobalberty/permset.git /src && \
     mkdir -p /out && \
     go build -ldflags "-X main.chownDir=/unifi" -o /out/permset
 
-FROM ubuntu:24.04
+FROM ubuntu:25.04
 
 LABEL maintainer="Jacob Alberty <jacob.alberty@foundigital.com>"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG PKGURL=https://dl.ui.com/unifi/9.5.21-6nxxr6v29z/unifi_sysvinit_all.deb
+ARG PKGURL=https://dl.ui.com/unifi/9.5.21/unifi_sysvinit_all.deb
 
 ENV BASEDIR=/usr/lib/unifi \
     DATADIR=/unifi/data \
@@ -42,6 +42,7 @@ RUN mkdir -p /usr/unifi \
      /usr/local/unifi/init.d \
      /usr/unifi/init.d \
      /usr/local/docker
+
 COPY docker-entrypoint.sh /usr/local/bin/
 COPY docker-healthcheck.sh /usr/local/bin/
 COPY docker-build.sh /usr/local/bin/
@@ -71,6 +72,9 @@ RUN mkdir -p /unifi && chown unifi:unifi -R /unifi
 COPY hotfixes /usr/local/unifi/hotfixes
 
 RUN chmod +x /usr/local/unifi/hotfixes/* && run-parts /usr/local/unifi/hotfixes
+
+RUN apt purge -y gosu; \
+    apt autoremove -y
 
 VOLUME ["/unifi", "${RUNDIR}"]
 
